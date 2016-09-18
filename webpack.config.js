@@ -35,6 +35,10 @@ var option_1 = {
   plugins: [
     devFlagPlugin
   ],
+  prod: {
+    host: process.env.HOST || 'localhost',
+    port: process.env.PORT || 3000
+  }
 }
 
 module.exports = option_1;
