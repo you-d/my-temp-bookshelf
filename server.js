@@ -101,6 +101,6 @@ new WebpackDevServer(webpack(config), {
   hot: true,
   historyApiFallback: true
 }).listen( process.env.PORT , 'localhost', function (err, result) {
-  console.log('Listening at host: ' + config.url.host + ' and port: ' + config.url.port);
+  console.log('Listening at host: localhost and port: ' + process.env.port);
   if (err) { return console.log(err); }
 });
