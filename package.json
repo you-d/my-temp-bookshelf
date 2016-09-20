@@ -4,11 +4,11 @@
   "description": "Redux based React.JS sample web app",
   "scripts": {
     "start": "node server.js",
-    "test": "./node_modules/gulp/bin/gulp.js; DEBUG=true node server.js",
+    "test": "./node_modules/gulp/bin/gulp.js; DEBUG=true PORT=3000 node server.js",
     "dev:lint": "eslint src",
     "dev:mocha": "mocha -w tests/helpers/browser.js tests/*.spec.js",
     "dev:sass": "./node_modules/gulp/bin/gulp.js;",
-    "dev:hot": "./node_modules/gulp/bin/gulp.js; DEBUG=true webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./"
+    "dev:hot": "./node_modules/gulp/bin/gulp.js; DEBUG=true PORT=3000 webpack-dev-server --hot --inline --progress --colors --watch --display-error-details --display-cached --content-base ./"
   },
   "keywords": [
     "react",

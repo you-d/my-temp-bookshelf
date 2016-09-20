@@ -34,11 +34,7 @@ var option_1 = {
   },
   plugins: [
     devFlagPlugin
-  ],
-  url: {
-    host: 'localhost',
-    port: parseInt(process.env.PORT) || 3000
-  }
+  ]
 }
 
 module.exports = option_1;

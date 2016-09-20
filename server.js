@@ -100,7 +100,7 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   historyApiFallback: true
-}).listen( config.url.port , config.url.host, function (err, result) {
+}).listen( process.env.PORT , 'localhost', function (err, result) {
   console.log('Listening at host: ' + config.url.host + ' and port: ' + config.url.port);
   if (err) { return console.log(err); }
 });
