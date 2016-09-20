@@ -36,7 +36,7 @@ var option_1 = {
     devFlagPlugin
   ],
   url: {
-    host: 'https://my-temp-bookshelf.herokuapp.com' || 'localhost',
+    host: 'localhost',
     port: parseInt(process.env.PORT) || 3000
   }
 }
