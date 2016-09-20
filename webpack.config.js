@@ -8,7 +8,7 @@ var devFlagPlugin = new webpack.DefinePlugin({
 var option_1 = {
   entry: './src/index',
   devServer: {
-    hot: true, inline: true, port: 3000, historyApiFallback: true
+    hot: true, inline: true, port: parseInt(process.env.PORT), historyApiFallback: true
   },
   resolve: {
     extensions: [ '', '.js' ],
@@ -35,9 +35,9 @@ var option_1 = {
   plugins: [
     devFlagPlugin
   ],
-  prod: {
-    host: process.env.HOST || 'localhost',
-    port: process.env.PORT || 3000
+  url: {
+    host: process.env.HOST.toString() || 'localhost',
+    port: parseInt(process.env.PORT) || 3000
   }
 }
 
