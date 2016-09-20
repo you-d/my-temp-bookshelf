@@ -44,9 +44,9 @@ export default class AboutMePanel extends Component {
                           </p>
                           <p>
                             Disclaimer:<br/>
-                            This web app is a prototype to demonstrate my knowledge in writing front-end code
-                            with React.JS by implementing the Redux Architecture.
-                            This web app is not meant to be used in production environment.
+                            This portfolio is a prototype to demonstrate my front-end / UI development knowledge
+                            by implementing React.JS with Redux Architecture.
+                            This portfolio is not designed to be used in production environment.
                           </p>
                           <br/>
                       </div>
