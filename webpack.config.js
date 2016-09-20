@@ -7,9 +7,6 @@ var devFlagPlugin = new webpack.DefinePlugin({
 
 var option_1 = {
   entry: './src/index',
-  devServer: {
-    hot: true, inline: true, port: parseInt(process.env.PORT), historyApiFallback: true
-  },
   resolve: {
     extensions: [ '', '.js' ],
   },
