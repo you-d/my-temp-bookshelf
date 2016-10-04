@@ -1,8 +1,29 @@
-import { initialState } from '../sampleData';
+import { clone } from 'lodash';
 import { calculateNewDateBasedOnPivotDate } from '../helper';
+import { initialStateTemplate, constructData } from '../data';
 
-export default function booksReducer(state = initialState, action) {
+// Hint: do not populate initial state from the local storage in reducer.
+// The proper way is through the createStore method.
+// In reducer, we can simply assign an empty object or {} as the default state value.
+// http://redux.js.org/docs/api/createStore.html
+// http://stackoverflow.com/questions/36619093/why-do-i-get-reducer-returned-undefined-during-initialization-despite-pr/36620420#36620420
+// http://github.com/reactjs/redux/issues/272
+let _initState = clone(initialStateTemplate);
+export default function booksReducer(state = _initState, action) {
     switch(action.type) {
+        case 'POPULATE_INIT_STATE_SUCCEEDED':
+            // construct the new state based on the retrieved actions
+            let _newState = constructData(action.booksResponseData,
+                                          action.librariesResponseData,
+                                          action.activitiesResponseData);
+
+            let _finalState = Object.assign( {}, state, _newState );
+
+            return _finalState;
+        case 'POPULATE_INIT_STATE_FAILED':
+            console.error("ERROR - fetching persisted state operation has failed. Return an empty state instead.");
+
+            return state;
         case 'BORROW_BOOK':
             const newActivityId = state.activities[state.activities.length - 1] + 1;
             const newBookId = state.books[state.books.length - 1] + 1;

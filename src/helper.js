@@ -1,6 +1,7 @@
 /*******************************
  * Reusable Helper functions
  *******************************/
+import { reduce, isEqual } from 'lodash';
 
 /**
  * Public function
@@ -180,4 +181,14 @@ export function ddmmyyyyStringConvertor(dateObj, separator) {
 export function isNotEmpty(inputString) {
     if(inputString == '' || inputString == null) { return false; }
     return true;
+}
+
+// return an array containing the list of keys of which the value is different
+export function JsonDiff(jsonA, jsonB) {
+    let result=[];
+    result = reduce(jsonA, (result, value, key)=> {
+        return isEqual(value, (jsonB)[key]) ? result : result.concat(key);
+    }, []);
+
+    return result;
 }

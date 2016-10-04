@@ -30,6 +30,7 @@ class BookShelfApp extends Component {
         this._librariesById = null;
         this._activitiesById = null;
         this._actions = bindActionCreators(ActionCreators, this.props.dispatch);
+
     }
     render() {
         // the members of this.props are injected by react-redux

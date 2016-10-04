@@ -1,5 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
+
 // start the app with ">> DEBUG=true npm start" which will give a __DEV__ flag
 var devFlagPlugin = new webpack.DefinePlugin({
     __DEV__ : JSON.stringify(JSON.parse(process.env.DEBUG || false))
@@ -11,9 +12,9 @@ var option_1 = {
     extensions: [ '', '.js' ],
   },
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist'), // for the PROD environment
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: '/static/' // for the redux hot reloading feature 
   },
   externals: {
     'cheerio': 'window',

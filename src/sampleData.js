@@ -4,9 +4,9 @@ export const initialState = {
         1: { id: 1, title: 'Pattern of Enterprise Application Architecture',
                     author: 'Martin Fowler', isbn: '978-1-4302-1998-9'},
         2: { id: 2, title: 'Code Complete (2nd Ed.)',
-                    author: 'Steve McConnell', isbn: '1–931836–59–0 '},
+                    author: 'Steve McConnell', isbn: '1–931836–59–0'},
         3: { id: 3, title: 'Test-Driven Development: By Example',
-                    author: 'Kent Beck', isbn: '1593270127 ' },
+                    author: 'Kent Beck', isbn: '1593270127' },
         4: { id: 4, title: 'Domain Driven Designs',
                     author: 'Eric Evans', isbn: '0 321 15420 7' },
         5: { id: 5, title: 'The Design of Everyday Things',
@@ -19,9 +19,9 @@ export const initialState = {
     libraries: [1,2,3],
     librariesById: {
         1: { id: 1, name: 'State Library of Victoria',
-                    address: '328 Swanston St, Melbourne, Vic, 3000' },
+                    address: '328 Swanston St, Melbourne, VIC, 3000' },
         2: { id: 2, name: 'City Library Melbourne',
-                    address: '90-120 Swanston St, Melbourne, Vic, 3000' },
+                    address: '90-120 Swanston St, Melbourne, VIC, 3000' },
         3: { id: 3, name: 'Library at the Dock',
                     address: '107 Victoria Harbour Promenade, Docklands, VIC, 3008' }
     },

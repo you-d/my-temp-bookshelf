@@ -66,16 +66,23 @@ export default class BookList extends Component {
                 </div>
                 {
                   Object.keys(this._activities).map( (aKey)=> {
-                      return (
-                          <BookListItem key={ this._activities[aKey].id }
-                                        activity={ this._activities[aKey] }
-                                        book={ find(this._books, ['id', this._activities[aKey].book_id]) }
-                                        library={ find(this._libraries, ['id', this._activities[aKey].library_id]) }
-                                        borrowedDate={ this._activities[aKey].starting_date }
-                                        filterText={ this.state.filterText }
-                                        actions={ this._actions }
-                                        triggerPopUpLibInfoFunc={ this.popUpLibInfoComponent } />
-                      );
+                      let _library = find(this._libraries, ['id', this._activities[aKey].library_id]);
+                      let _book = find(this._books, ['id', this._activities[aKey].book_id]);
+
+                      if (_library == undefined || _book == undefined) {
+                        return;
+                      } else {
+                        return (
+                            <BookListItem key={ this._activities[aKey].id }
+                                          activity={ this._activities[aKey] }
+                                          book={ _book }
+                                          library={ _library }
+                                          borrowedDate={ this._activities[aKey].starting_date }
+                                          filterText={ this.state.filterText }
+                                          actions={ this._actions }
+                                          triggerPopUpLibInfoFunc={ this.popUpLibInfoComponent } />
+                        );
+                      }
                   })
                 }
                 <div id="libraryInfoPanelPlaceholder"></div>
