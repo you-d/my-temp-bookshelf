@@ -1,5 +1,8 @@
 # my-temp-bookshelf #
-A portfolio to demonstrate my knowledge in front-end development by utilising React.JS, and Redux Architecture.
+A web application development portfolio that is built with React.JS, and adhering to Redux Architecture Paradigm.
+
+update:
+new git branch : async-redux-thunk - asynchronous data fetching from remote storage
 
 ## Demonstrated techs ##
 Branch : All
