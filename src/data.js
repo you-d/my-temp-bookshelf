@@ -1,14 +1,11 @@
 import axios from 'axios';
 import { cloneDeep } from 'lodash';
 import { initialState } from './sampleData';
-import * as Port from '../config/port';
 
 const _config = {
     headers: { 'Accept': 'application/json',
                'Content-Type': 'application/json' }
 };
-
-let _protocol = Port.host == 'localhost' ? 'http://' : 'https://';
 
 export const initialStateTemplate = {
     books: [], booksById: {},
@@ -49,14 +46,18 @@ export function constructData(_booksData, _librariesData, _activitiesData) {
     return _theState;
 }
 
+// TODO : Environment aware api_uri
+let dev_api_uri = 'http://localhost:4000';
+let prod_api_uri = 'https://my-temp-bookshelf.herokuapp.com'
+
 export function getBooks() {
-    return axios.get(_protocol + Port.host + ':' + Port.apiPort + '/book', _config);
+    return axios.get(prod_api_uri + '/book', _config);
 }
 
 export function getLibraries() {
-    return axios.get(_protocol + Port.host + ':' + Port.apiPort + '/library', _config);
+    return axios.get(prod_api_uri + '/library', _config);
 }
 
 export function getActivities() {
-    return axios.get(_protocol + Port.host + ':' + Port.apiPort + '/activity', _config);
+    return axios.get(prod_api_uri + '/activity', _config);
 }
