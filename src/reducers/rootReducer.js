@@ -21,7 +21,7 @@ export default function booksReducer(state = _initState, action) {
 
             return _finalState;
         case 'POPULATE_INIT_STATE_FAILED':
-            console.error("ERROR - fetching persisted state operation has failed. Return an empty state instead.");
+            console.error("ERROR - fetching persisted state operation has failed. Return an empty state instead. " + action.error);
 
             return state;
         case 'BORROW_BOOK':
