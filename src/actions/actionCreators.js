@@ -19,6 +19,12 @@ export function returnBook(id, ending_date) {
     };
 }
 
+function populateInitialStateAsyncPending() {
+    return {
+        type: ActionTypes.POPULATE_INIT_STATE_PENDING
+    };
+}
+
 function populateInitialStateAsyncSucceeded(booksResponseData,
                                             librariesResponseData,
                                             activitiesResponseData) {
@@ -41,31 +47,26 @@ function populateInitialStateAsyncFailed(error) {
 // This function is called in containers/App.js
 export function populateInitialStateAsync() {
     return (dispatch, getState)=> {
-        // with redux-promise-middleware
-        // https://github.com/pburtchaell/redux-promise-middleware/blob/master/docs/guides/chaining-actions.md
-        //ON THE RIGHT TRACK - BUT DAMN AXIOS!!!
-        /*
-        return dispatch({
-            type: ActionTypes.POPULATE_INIT_STATE,
-            payload: new Promise( (resolve, reject)=> {
-                resolve( populateInitialStateAPICall() );
-                //reject( populateInitialStateAPICall() );
-            } )
-        }).then( ({value, action}) => {
-            console.log("VALUE " + JSON.stringify(value));
-            console.log("ACTION " + JSON.stringify(action));
-        } );
-        */
+        // dispatch the pending state
+        dispatch( populateInitialStateAsyncPending() );
 
-        // stackoverflow.com/questions/35439019/redux-promise-with-axios-and-how-to-deal-with-errors
+        // ref: stackoverflow.com/questions/35439019/redux-promise-with-axios-and-how-to-deal-with-errors
         axios.all([ Data.getBooks(), Data.getLibraries(), Data.getActivities() ])
              .then(axios.spread( (booksResponse, librariesResponse, activitiesResponse)=> {
                  if (booksResponse.status == 200 &&
                      librariesResponse.status == 200 &&
                      activitiesResponse.status == 200) {
-                        dispatch( populateInitialStateAsyncSucceeded(booksResponse.data,
-                                                                     librariesResponse.data,
-                                                                     activitiesResponse.data) );
+                        // TODO : Check the structural correctness of the retrieved data
+
+                        // DEV_NOTE :
+                        // deliberately delay sending the action to reducer by 3 secs
+                        // because I'd like to show the cool loading animation.
+                        setTimeout( ()=> {
+                          dispatch( populateInitialStateAsyncSucceeded(booksResponse.data,
+                                                                       librariesResponse.data,
+                                                                       activitiesResponse.data) );
+                        }, 3000 );
+
                  }
              }))
              .catch( (error)=> {

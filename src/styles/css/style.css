@@ -83,6 +83,15 @@
 .tableRow > div:last-child {
   border-right: 1px solid #777; }
 
+.specialModeRow > div, .spinnerRow > div, .errorMsgRow > div {
+  text-align: center;
+  height: 80px;
+  padding-top: 20px;
+  background-color: #FFF; }
+
+.errorMsgRow {
+  color: red; }
+
 .formContainer {
   position: absolute;
   top: 0px;

@@ -13,7 +13,9 @@ import BookList from '../components/bookList';
 function mapStateToProps(state) {
     return { booksById : state.default.booksById,
              librariesById : state.default.librariesById,
-             activitiesById: state.default.activitiesById };
+             activitiesById: state.default.activitiesById,
+             specialMode : state.default.specialMode,
+             targetActivityId : state.default.targetActivityId };
 }
 
 // the undecorated version of the component
@@ -21,7 +23,9 @@ class BookShelfApp extends Component {
     static propTypes = {
         booksById : PropTypes.object.isRequired,
         librariesById : PropTypes.object.isRequired,
-        activitiesById : PropTypes.object.isRequired
+        activitiesById : PropTypes.object.isRequired,
+        specialMode : PropTypes.string.isRequired,
+        targetActivityId : PropTypes.number.isRequired
     }
     constructor(props, context) {
         super(props, context);
@@ -29,6 +33,7 @@ class BookShelfApp extends Component {
         this._booksById = null;
         this._librariesById = null;
         this._activitiesById = null;
+        this._specialMode = null;
         this._actions = bindActionCreators(ActionCreators, this.props.dispatch);
 
     }
@@ -37,6 +42,8 @@ class BookShelfApp extends Component {
         this._booksById = this.props.booksById;
         this._librariesById = this.props.librariesById;
         this._activitiesById = this.props.activitiesById;
+        this._specialMode = { mode : this.props.specialMode,
+                              activityId : this.props.targetActivityId };
 
         return (
             <div className="container desktop-only">
@@ -44,6 +51,7 @@ class BookShelfApp extends Component {
                 <BookList books={ this._booksById }
                           libraries={ this._librariesById }
                           activities={ this._activitiesById }
+                          specialMode={ this._specialMode }
                           actions={ this._actions } />
             </div>
         );

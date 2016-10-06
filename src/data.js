@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { cloneDeep } from 'lodash';
 import { initialState } from './sampleData';
+import * as SpecialModeTypes from './constants/specialMode';
 
 const _config = {
     headers: { 'Accept': 'application/json',
@@ -8,6 +9,8 @@ const _config = {
 };
 
 export const initialStateTemplate = {
+    specialMode: SpecialModeTypes.SPECIAL_MODE_DISABLED,
+    targetActivityId: SpecialModeTypes.SPECIAL_MODE_DEFAULT_ACTIVITY_ID,
     books: [], booksById: {},
     libraries: [], librariesById: {},
     activities: [], activitiesById: {}
@@ -48,16 +51,17 @@ export function constructData(_booksData, _librariesData, _activitiesData) {
 
 // TODO : Environment aware api_uri
 let dev_api_uri = 'http://localhost:4000';
-let prod_api_uri = 'https://my-temp-bookshelf.herokuapp.com'
+let prod_api_uri = 'https://my-temp-bookshelf.herokuapp.com';
+let api_uri = prod_api_uri;
 
 export function getBooks() {
-    return axios.get(prod_api_uri + '/book', _config);
+    return axios.get(api_uri + '/book', _config);
 }
 
 export function getLibraries() {
-    return axios.get(prod_api_uri + '/library', _config);
+    return axios.get(api_uri + '/library', _config);
 }
 
 export function getActivities() {
-    return axios.get(prod_api_uri + '/activity', _config);
+    return axios.get(api_uri + '/activity', _config);
 }

@@ -54,6 +54,14 @@ $button-border: 1px solid #000;
         border-right: $table-border;
     }
 }
+.specialModeRow {
+    &> div {
+        text-align: center; height: 80px; padding-top: 20px;
+        background-color: #FFF;
+    }
+}
+.spinnerRow { @extend .specialModeRow; }
+.errorMsgRow { @extend .specialModeRow; color: red; }
 .formContainer {
     position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;
     background-color: rgba(0, 0, 0, 0.5); z-index:1;

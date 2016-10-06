@@ -1,6 +1,7 @@
 import { clone } from 'lodash';
 import { calculateNewDateBasedOnPivotDate } from '../helper';
 import { initialStateTemplate, constructData } from '../data';
+import * as SpecialModeTypes from '../constants/specialMode';
 
 // Hint: do not populate initial state from the local storage in reducer.
 // The proper way is through the createStore method.
@@ -11,6 +12,9 @@ import { initialStateTemplate, constructData } from '../data';
 let _initState = clone(initialStateTemplate);
 export default function booksReducer(state = _initState, action) {
     switch(action.type) {
+        case 'POPULATE_INIT_STATE_PENDING':
+            return { ...state,
+                     specialMode : SpecialModeTypes.SPECIAL_MODE_PENDING_INIT_DATA_FETCH };
         case 'POPULATE_INIT_STATE_SUCCEEDED':
             // construct the new state based on the retrieved actions
             let _newState = constructData(action.booksResponseData,
@@ -23,7 +27,8 @@ export default function booksReducer(state = _initState, action) {
         case 'POPULATE_INIT_STATE_FAILED':
             console.error("ERROR - fetching persisted state operation has failed. Return an empty state instead. " + action.error);
 
-            return state;
+            return { ...state,
+                     specialMode : SpecialModeTypes.SPECIAL_MODE_ERROR_INIT_DATA_FETCH };
         case 'BORROW_BOOK':
             const newActivityId = state.activities[state.activities.length - 1] + 1;
             const newBookId = state.books[state.books.length - 1] + 1;

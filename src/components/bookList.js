@@ -2,13 +2,18 @@ import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { find } from 'lodash';
 
+import * as SpecialModeTypes from '../constants/specialMode';
 import SearchBar from './searchBar';
 import BookListItem from './bookListItem';
 import GoogleMapPanel from './googleMapPanel';
 
 export default class BookList extends Component {
     static propTypes = {
-        books : PropTypes.object.isRequired
+        books : PropTypes.object.isRequired,
+        libraries : PropTypes.object.isRequired,
+        activities : PropTypes.object.isRequired,
+        specialMode : PropTypes.object.isRequired,
+        actions : PropTypes.object.isRequired
     }
     constructor(props, context) {
         super(props, context);
@@ -16,6 +21,7 @@ export default class BookList extends Component {
         this._books = null;
         this._libraries = null;
         this._activities = null;
+        this._specialMode = null;
         this._actions = this.props.actions;
 
         this._libraryInfoPanelPlaceholder = null;
@@ -46,6 +52,7 @@ export default class BookList extends Component {
         this._books = this.props.books;
         this._libraries = this.props.libraries;
         this._activities = this.props.activities;
+        this._specialMode = this.props.specialMode;
 
         return (
             <section className="bookList">
@@ -65,25 +72,51 @@ export default class BookList extends Component {
                     <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                 </div>
                 {
-                  Object.keys(this._activities).map( (aKey)=> {
-                      let _library = find(this._libraries, ['id', this._activities[aKey].library_id]);
-                      let _book = find(this._books, ['id', this._activities[aKey].book_id]);
-
-                      if (_library == undefined || _book == undefined) {
-                        return;
-                      } else {
-                        return (
-                            <BookListItem key={ this._activities[aKey].id }
-                                          activity={ this._activities[aKey] }
-                                          book={ _book }
-                                          library={ _library }
-                                          borrowedDate={ this._activities[aKey].starting_date }
-                                          filterText={ this.state.filterText }
-                                          actions={ this._actions }
-                                          triggerPopUpLibInfoFunc={ this.popUpLibInfoComponent } />
-                        );
+                    (()=> {
+                      switch(this._specialMode.mode) {
+                          case SpecialModeTypes.SPECIAL_MODE_PENDING_INIT_DATA_FETCH :
+                              return (
+                                <div className="row spinnerRow">
+                                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <i className="fa fa-refresh fa-spin" aria-hidden="true"></i>
+                                        <span>Fetching Data...</span>
+                                    </div>
+                                </div>
+                              );
+                          case SpecialModeTypes.SPECIAL_MODE_ERROR_INIT_DATA_FETCH :
+                              return (
+                                <div className="row errorMsgRow">
+                                    <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                        <i className="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                        <span>Oops! Something went wrong </span>
+                                        <i className="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                              );
                       }
-                  })
+
+                    })()
+                }
+                {
+                    Object.keys(this._activities).map( (aKey)=> {
+                        let _library = find(this._libraries, ['id', this._activities[aKey].library_id]);
+                        let _book = find(this._books, ['id', this._activities[aKey].book_id]);
+
+                        if (_library == undefined || _book == undefined) {
+                          return;
+                        } else {
+                          return (
+                              <BookListItem key={ this._activities[aKey].id }
+                                            activity={ this._activities[aKey] }
+                                            book={ _book }
+                                            library={ _library }
+                                            borrowedDate={ this._activities[aKey].starting_date }
+                                            filterText={ this.state.filterText }
+                                            actions={ this._actions }
+                                            triggerPopUpLibInfoFunc={ this.popUpLibInfoComponent } />
+                          );
+                        }
+                    })
                 }
                 <div id="libraryInfoPanelPlaceholder"></div>
             </section>
