@@ -19,4 +19,5 @@ Branch : All
 Branch : async-redux-thunk
 * Axios
 * Redux-Thunk middleware
+* React-Router (w/ React-Router-Redux)
 * Mongo DB
