@@ -47,7 +47,7 @@ class BookShelfApp extends Component {
 
         return (
             <div className="container desktop-only">
-                <Header actions={ this._actions } />
+                <Header />
                 <BookList books={ this._booksById }
                           libraries={ this._librariesById }
                           activities={ this._activitiesById }

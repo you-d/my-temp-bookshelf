@@ -14,12 +14,15 @@ var option_1 = {
   output: {
     path: path.join(__dirname, 'dist'), // for the PROD environment
     filename: 'bundle.js',
-    publicPath: '/static/' // for the redux hot reloading feature 
+    publicPath: '/static/' // for the redux hot reloading feature
   },
   externals: {
     'cheerio': 'window',
     'react/lib/executionEnvironment': true,
     'react/lib/ReactContext': true,
+  },
+  devServer: {
+    historyApiFallback: true, // for react-router
   },
   module: {
     loaders: [

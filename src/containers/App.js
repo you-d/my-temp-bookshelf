@@ -3,14 +3,19 @@ import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import promiseMiddleware from 'redux-promise-middleware';
 import { Provider } from 'react-redux';
+import { Router, Route, browserHistory } from 'react-router';
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 
-import BookShelfApp from './BookShelfApp';
 import * as Reducers from '../reducers/rootReducer';
 import { populateInitialStateAsync } from '../actions/actionCreators';
 
+import BookShelfApp from './BookShelfApp';
+import MiscApp from './MiscApp';
+
 import { initialState } from '../data';
 
-const rootReducer = combineReducers(Reducers);
+const rootReducer = combineReducers({ ...Reducers,
+                                      routing: routerReducer });
 // construct the acceptable structure for the 2nd argument of the createStore function.
 // This is necessary because we are using the combineReducers function.
 let createStore2ndArg = { default : initialState };
@@ -26,6 +31,8 @@ if(__DEV__) {
     store = createStore(rootReducer, createStore2ndArg,
                         applyMiddleware(...middlewares));
 }
+// create an enhanced history that sync navigation events with the store
+const history = syncHistoryWithStore(browserHistory, store);
 
 export default class App extends Component {
   constructor(props, context) {
@@ -41,7 +48,10 @@ export default class App extends Component {
       return (
           <div>
             <Provider store={ store }>
-                <BookShelfApp />
+                <Router history={ history }>
+                    <Route path='/' component={ BookShelfApp } />
+                    <Route path='/:pageName' component={ MiscApp } />
+                </Router>
             </Provider>
           </div>
       );

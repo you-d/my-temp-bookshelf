@@ -17,6 +17,18 @@
   margin-left: 0px;
   margin-right: 0px; }
 
+.sharedNavMenu > div, .header > div.navMenu > div, .bookList > div.row:first-child > div:first-child > div.navMenu > div {
+  padding-right: 10px;
+  margin-right: 10px;
+  float: left;
+  cursor: pointer;
+  border-right: 1px solid #000; }
+  .sharedNavMenu > div:last-child, .header > div.navMenu > div:last-child, .bookList > div.row:first-child > div:first-child > div.navMenu > div:last-child {
+    border-right: 0px; }
+
+.sharedNavMenu > div:hover, .header > div.navMenu > div:hover, .bookList > div.row:first-child > div:first-child > div.navMenu > div:hover {
+  text-decoration: underline; }
+
 .header {
   margin-top: 20px; }
   .header > div:first-child {
@@ -28,19 +40,16 @@
   .header > div.navMenu {
     padding-top: 6px; }
     .header > div.navMenu > div {
-      padding-right: 10px;
-      margin-right: 10px;
-      float: left;
-      cursor: pointer;
-      border-right: 1px solid #000; }
-      .header > div.navMenu > div:last-child {
-        border-right: 0px; }
-    .header > div.navMenu > div:nth-child(1) {
       padding-top: 3px; }
-    .header > div.navMenu > div:nth-child(2) {
-      padding-top: 3px; }
-    .header > div.navMenu > div:hover {
-      text-decoration: underline; }
+
+.navLink {
+  color: #777; }
+  .navLink:hover {
+    color: #000; }
+
+.activeNavLink {
+  text-decoration: underline;
+  color: #000; }
 
 .bookList {
   width: 90%;
@@ -56,6 +65,15 @@
       padding-left: 0px;
       margin-bottom: 10px;
       font-size: 18px; }
+      .bookList > div.row:first-child > div:first-child > div {
+        float: left; }
+      .bookList > div.row:first-child > div:first-child > div.navMenu {
+        font-size: 14px;
+        margin-left: 20px; }
+        .bookList > div.row:first-child > div:first-child > div.navMenu > div:nth-child(1) {
+          padding-top: 3px; }
+        .bookList > div.row:first-child > div:first-child > div.navMenu > div:nth-child(2) {
+          padding-top: 3px; }
     .bookList > div.row:first-child > div:nth-child(2) {
       /* search bar */
       padding-right: 0px;

@@ -6,6 +6,10 @@ import * as SpecialModeTypes from '../constants/specialMode';
 import SearchBar from './searchBar';
 import BookListItem from './bookListItem';
 import GoogleMapPanel from './googleMapPanel';
+import BorrowBookBtn from './borrowBookBtn';
+import BorrowBookForm from './borrowBookForm';
+import AboutMeBtn from './aboutMeBtn';
+import AboutMePanel from './aboutMePanel';
 
 export default class BookList extends Component {
     static propTypes = {
@@ -29,13 +33,41 @@ export default class BookList extends Component {
         this.handleSearchBarInput = this.handleSearchBarInput.bind(this);
         this.popUpLibInfoComponent = this.popUpLibInfoComponent.bind(this);
 
+        this.popUpComponent = this.popUpComponent.bind(this);
+
+        this._popUpPlaceHolder = null;
+
         this.state = { filterText : '' };
     }
     componentDidMount() {
         this._libraryInfoPanelPlaceholder = document.getElementById('libraryInfoPanelPlaceholder');
+
+        this._popUpPlaceHolder = document.getElementById('popUpPlaceholder');
+
+        let popUpComponent = this.popUpComponent;
     }
     handleSearchBarInput(inputVal) {
         this.setState({ filterText: inputVal });
+    }
+    popUpComponent(whichComponent, mount) {
+        switch(whichComponent) {
+            case 'BorrowBookForm' :
+                if(mount) {
+                    ReactDOM.render(<BorrowBookForm actions={ this._actions } triggerPopUpComponentFunc={ this.popUpComponent } />,
+                                    this._popUpPlaceHolder);
+                } else {
+                    ReactDOM.unmountComponentAtNode(this._popUpPlaceHolder);
+                }
+                break;
+            case 'AboutMePanel' :
+                if(mount) {
+                    ReactDOM.render(<AboutMePanel triggerPopUpComponentFunc={ this.popUpComponent } />,
+                                    this._popUpPlaceHolder);
+                } else {
+                    ReactDOM.unmountComponentAtNode(this._popUpPlaceHolder);
+                }
+                break;
+        }
     }
     popUpLibInfoComponent(mount, lib_name='', lib_addr='') {
         if(mount) {
@@ -58,7 +90,12 @@ export default class BookList extends Component {
             <section className="bookList">
                 <div className="row">
                     <div className="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-                        <strong>Currently Borrowed Books</strong>
+                        <div><strong>Currently Borrowed Books</strong></div>
+                        <div className='navMenu'>
+                            <BorrowBookBtn popUpComponentFunc={ this.popUpComponent } />
+                            <AboutMeBtn popUpComponentFunc={ this.popUpComponent } />
+                        </div>
+                        <div className='floatReset'></div>
                     </div>
                     <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
                         <SearchBar onUserInput={ this.handleSearchBarInput } />
@@ -118,6 +155,7 @@ export default class BookList extends Component {
                         }
                     })
                 }
+                <div id='popUpPlaceholder'></div>
                 <div id="libraryInfoPanelPlaceholder"></div>
             </section>
         );
