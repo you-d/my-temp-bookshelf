@@ -2,7 +2,8 @@
 A web application development portfolio that is built with React.JS, and adhering to Redux Architecture Paradigm.
 
 update:
-new git branch : async-redux-thunk - asynchronous data fetching from remote storage
+* [9/10/16] Implemented React Router in the async-redux-thunk branch. 
+* [5/10/16] new git branch : async-redux-thunk - asynchronous data fetching from remote storage.
 
 ## Demonstrated techs ##
 Branch : All
@@ -19,4 +20,5 @@ Branch : All
 Branch : async-redux-thunk
 * Axios
 * Redux-Thunk middleware
+* React-Router (w/ React-Router-Redux)
 * Mongo DB
