@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
-import { crossBrowserAddEventListener } from '../helper';
-
 export default class SearchBar extends Component {
     static PropTypes = {
         onUserInput : PropTypes.func.isRequired

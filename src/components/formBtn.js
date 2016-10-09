@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { crossBrowserAddEventListener } from '../helper';
 
-export default class formBtn extends Component {
+export default class FormBtn extends Component {
     static propTypes = {
         clickHandlerFunc : PropTypes.func.isRequired,
         assignedClassName : PropTypes.string.isRequired,
