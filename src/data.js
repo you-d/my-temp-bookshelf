@@ -52,7 +52,7 @@ export function constructData(_booksData, _librariesData, _activitiesData) {
 // TODO : Environment aware api_uri
 let dev_api_uri = 'http://localhost:4000';
 let prod_api_uri = 'https://my-temp-bookshelf.herokuapp.com';
-let api_uri = dev_api_uri;
+let api_uri = prod_api_uri;
 
 export function getBooks() {
     return axios.get(api_uri + '/book', _config);
