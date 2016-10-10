@@ -9,13 +9,14 @@ import { initialState } from '../src/sampleData';
 function shallowSetup() {
     const stubProps = {
       books: initialState.booksById,
-      employees: initialState.employeesById,
+      libraries: initialState.librariesById,
       activities: initialState.activitiesById,
+      specialMode : initialState.specialMode,
       actions: {}
     };
     const enzymeWrapper = shallow(<PureBookList { ...stubProps } />);
 
-    return { stubProps, enzymeWrapper }
+    return { enzymeWrapper }
 }
 
 describe('<BookList />', ()=> {

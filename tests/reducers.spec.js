@@ -1,6 +1,7 @@
 import React from 'react';
 import { expect } from 'chai';
 
+import { initialStateTemplate } from '../src/data';
 import { initialState } from '../src/sampleData';
 import { default as booksReducer } from '../src/reducers/rootReducer';
 
@@ -76,7 +77,7 @@ const _sampleReturnBookNewState = {
 describe('Reducers', function() {
     describe('booksReducer', function() {
         it("must return the initialState given an undefined state", function() {
-            expect( booksReducer(undefined, {}) ).to.deep.equal( initialState );
+            expect( booksReducer(undefined, {}) ).to.deep.equal( initialStateTemplate );
         });
         it("must return an updated copy of the initial state - case: borrow a book", function() {
             expect( booksReducer(initialState, _sampleBorrowBookAction) ).

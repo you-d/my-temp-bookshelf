@@ -1,4 +1,8 @@
+import * as SpecialModeTypes from './constants/specialMode';
+
 export const initialState = {
+    specialMode: SpecialModeTypes.SPECIAL_MODE_DISABLED,
+    targetActivityId: SpecialModeTypes.SPECIAL_MODE_DEFAULT_ACTIVITY_ID,
     books: [1,2,3,4,5,6,7],
     booksById: {
         1: { id: 1, title: 'Pattern of Enterprise Application Architecture',
