@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import NavLink from './navLink'
 
+/* SFC - w/ implicit return (and ES6 destructuring) */
 const Header = ()=> (
     <section className='row'>
         <div className='header col-lg-12 col-md-12 col-sm-12 col-xs-12'>
